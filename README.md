@@ -47,7 +47,7 @@ BareBone's `easyRoute` method recognizes a default method on controllers. This m
     /* Non-default method. */
     method()
     {
-    /* Method Stuff Here */
+      /* Method Stuff Here */
     }
   }
 ```
