@@ -13,6 +13,7 @@ Installing BareBones is a very simple process.
 
 - Clone this repository into any directory within Apache2's document root. (Yes, it really will work from any directory.)
 - Edit the database configuration file located at 'config/database.php'. Enter the desired database definition in Capsule's 'addConnection' method.
+
 #Developer Documentation
 Writing an application with BareBones is fairly straight forward. BareBones has an easy to understand directory structure, and simple syntax.
 
