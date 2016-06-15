@@ -117,23 +117,41 @@
       else
         return false;
     }
-    function get($uri, $callback) {
+    function get($uri, $callback)
+    {
       $this->executeRoute("GET", $uri, $callback);
     }
-    function post($uri, $callback) {
+    function post($uri, $callback)
+    {
       $this->executeRoute("POST", $uri, $callback);
     }
-    function put($uri, $callback) {
+    function put($uri, $callback)
+    {
       $this->executeRoute("PUT", $uri, $callback);
     }
-    function delete($uri, $callback) {
+    function delete($uri, $callback)
+    {
       $this->executeRoute("DELETE", $uri, $callback);
     }
-    function all($uri, $callback) {
+    function all($uri, $callback)
+    {
       $this->executeRoute("ALL", $uri, $callback);
     }
-    function route($requestTypes = [], $uri, $callback) {
+    function route($requestTypes = [], $uri, $callback)
+    {
       $this->executeRoute($requestTypes, $uri, $callback);
+    }
+    function notFound($callback)
+    {
+      if (!$this->routeFound)
+      {
+        $uriVariables = $this->getUriVariables($route, implode("/", $this->uri));
+        if (is_array($uriVariables))
+        {
+          call_user_func_array($callback, $uriVariables);
+          $this->routeFound = true;
+        }
+      }
     }
     function easyRoute()
     {
