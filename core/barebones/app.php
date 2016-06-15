@@ -145,9 +145,8 @@
     {
       if (!$this->routeFound)
       {
-          $callback();
-          $this->routeFound = true;
-        }
+        $callback();
+        $this->routeFound = true;
       }
     }
     function easyRoute()
