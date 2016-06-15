@@ -27,6 +27,7 @@ BareBones has been tested on a Debian 8 Jessie server running PHP7, Apache 2.4 w
 - `config`: This directory contains BareBone's configuration files. You may use this directory for your own application's configuration files as long as they do not create a path conflict with any of BareBone's configuration files.
 - `assets`: This directory contains 3 sub-directories: `controllers`, `models`, and `views`. Controllers, models, and views should be contained in their related directories. You will not be able to access views in the controllers directory, etc. Each of these sub-directories can contain sub-directories containing their related files without affecting their accesibility. (I.E. You can put a controller in `controllers/main`, etc.)
 - `core`: This directory contains the core BareBone's classes as well as an initialization file. No editing is required.
+
 ##Controllers
 
 Creating a BareBones controller is simple. To create a controller, create a file in the `controllers` directory. It is important that the name of this file be the same name as the controller class name it will contain. Class names are not case-sensitive, but filenames are.
