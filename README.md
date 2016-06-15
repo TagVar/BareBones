@@ -38,16 +38,16 @@ BareBone's `easyRoute` method recognizes a default method on controllers. This m
 
   class BareBonesController extends Controller
   {
-    //The "index()" method will be used by Easy Route.
+    /* The "index()" method will be used by Easy Route. */
     index()
     {
-      //Method Stuff Here
+      /* Method Stuff Here */
     }
 
-    //Non-default method. 
+    /* Non-default method. */
     method()
     {
-    //Method Stuff Here
+    /* Method Stuff Here */
     }
   }
 ```
@@ -67,13 +67,13 @@ Ex)
   {
     index()
     {
-      //Get a model from "assets/models" named "firstModel.php"
+      /* Get a model from "assets/models" named "firstModel.php" */
       $firstModel = $this->getModel("firstModel");
 
-      //Get a model from "assets/models/subdir" named "secondModel.php"
+      /* Get a model from "assets/models/subdir" named "secondModel.php" */
       $secondModel = $this->getModel("secondModel", "subdir");
 
-      //Get a model from "assets/models/subdir" named "thirdModel.php"
+      /* Get a model from "assets/models/subdir" named "thirdModel.php" */
       $thirdModel = $this->getModel("thirdModel", "/subdir/");
     }
   }
@@ -93,16 +93,16 @@ Ex)
   {
     index()
     {
-      //Render a view in "assets/views" named "firstView.html" with no data.
+      /* Render a view in "assets/views" named "firstView.html" with no data. */
       $this->renderView("firstView.html");
 
-      //Render a view in "assets/views" named "secondView.html" with data.
+      /* Render a view in "assets/views" named "secondView.html" with data. */
       $this->renderView("secondView.html", ["one" => "dataOne", "two" => "dataTwo"]);
 
-      //Render a view in "assets/views/subdir" named "thirdView.html" with no data.
+      /* Render a view in "assets/views/subdir" named "thirdView.html" with no data. */
       $this->renderView("thirdView.html", [], "subdir");
 
-      //Render a view in "assets/views/subdir" named "fourthView.html" with data.
+      /* Render a view in "assets/views/subdir" named "fourthView.html" with data. */
      $this->renderView("fourthView.html", ["one" => "dataOne", "two" => "dataTwo"], "subdir");
     }
   }
@@ -141,13 +141,13 @@ Ex)
 
   $app = new App;
 
-  //Look for a controller in "assets/controllers" contained in "firstController.php"
+  /* Look for a controller in "assets/controllers" contained in "firstController.php" */
   $app->controllerExists("firstController");
 
-  //Look for a controller in "assets/controllers/subdir" contained in "secondController.php"
+  /* Look for a controller in "assets/controllers/subdir" contained in "secondController.php" */
   $app->controllerExists("secondController", "subdir");
 
-  //Look for a controller in "assets/controllers/subdir" contained in "thirdController.php"
+  /* Look for a controller in "assets/controllers/subdir" contained in "thirdController.php" */
   $app->controllerExists("thirdController", "/subdir/");
 ```
 `checkDefaultMethod()`: The `checkDefaultMethod` method returns `true` if the current controller has an `index` method, and `false` if a controller is not set, or does not contain the `index` method.
@@ -160,7 +160,7 @@ Ex)
 
   $app = new App;
 
-  //Check if the the current controller has an "index" method.
+  /* Check if the the current controller has an "index" method. */
   $hasDefaultMethodBoolean = $app->checkDefaultMethod();
 ```
 
@@ -173,14 +173,13 @@ Ex)
 
   $app = new App;
 
-  //Set $App's controller to and instance of `firstController` contained in "assets/controllers/firstController.php".
+  /* Set $App's controller to and instance of `firstController` contained in "assets/controllers/firstController.php". */
   if ($app->setController("firstController"))
     echo "Controller set!";
   else
     echo "Error: Controller not set.";
 
-  //Set $App's controller to and instance of `secondController` contained in
-  //"assets/controllers/subdir/firstController.php".
+  /* Set $App's controller to and instance of `secondController` contained in "assets/controllers/subdir/firstController.php". */
   if ($app->setController("secondController", "subdir"))
     echo "Controller set!";
   else
@@ -206,13 +205,11 @@ Ex) Assume BareBone's installation at `http://yourDomain.com/BareBones`
 
   $app = new App;
 
-  //Create a route which matches a GET request to "http://yourDomain.com/BareBones/get" and echos some text.
+  /* Create a route which matches a GET request to "http://yourDomain.com/BareBones/get" and echos some text. */
   $app->get("/get", function() {
     echo "Some Text in a Simple View";
   });
-  //Create a route which matches all request types to "http://yourDomain.com/BareBones/all/(ANYTHING)", sets $App's
-  //controller to "firstController" contained in "assets/controllers/firstController.php" and calls the "index" method on
-  //it where "(ANYTHING)" is passed as the "$callbackVariable" argument.
+  /* Create a route which matches all request types to "http://yourDomain.com/BareBones/all/(ANYTHING)", sets $App's controller to "firstController" contained in "assets/controllers/firstController.php" and calls the "index" method on it where "(ANYTHING)" is passed as the "$callbackVariable" argument. */
   $app->all("/all/$", function($callbackVariable) use($app) {
     if ($app->setController("firstController"))
     {
@@ -240,13 +237,11 @@ Ex)
 
   $app = new App;
 
-  //Create a route which matches GET and POST requests to "http://yourDomain.com/BareBones/getPost" and echos some text.
+  /* Create a route which matches GET and POST requests to "http://yourDomain.com/BareBones/getPost" and echos some text. */
   $app->route(["GET", "POST"], "/getPost", function() {
     echo "Some Text in a Simple View";
   });
-  //Create a route which matches PUT and DELETE request types to "http://yourDomain.com/BareBones/putDelete/(ANYTHING)"
-  //, sets $App's controller to "firstController" contained in "assets/controllers/firstController.php" and calls the
-  //"index" method on it where "(ANYTHING)" is passed as the "$callbackVariable" argument.
+  /* Create a route which matches PUT and DELETE request types to "http://yourDomain.com/BareBones/putDelete/(ANYTHING)", sets $App's controller to "firstController" contained in "assets/controllers/firstController.php" and calls the "index" method on it where "(ANYTHING)" is passed as the "$callbackVariable" argument.*/
   $app->all("/putDelete/$", function($callbackVariable) use($app) {
     if ($app->setController("secondController"))
     {
