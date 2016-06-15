@@ -112,7 +112,6 @@ Ex)
 
 BareBones models simply extend Eloquent and set Eloquent's timestamp requirements to `false`. This is a public property of the class called `timestamps`.
 
-https://laravel.com/docs/4.2/eloquent
 [The Documentation for Laravel's Eloquent can be Found Here](https://laravel.com/docs/4.2/eloquent)
 
 ##The App Class and Routing
