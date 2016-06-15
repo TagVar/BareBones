@@ -145,10 +145,7 @@
     {
       if (!$this->routeFound)
       {
-        $uriVariables = $this->getUriVariables($route, implode("/", $this->uri));
-        if (is_array($uriVariables))
-        {
-          call_user_func_array($callback, $uriVariables);
+          $callback();
           $this->routeFound = true;
         }
       }
