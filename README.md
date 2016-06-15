@@ -17,11 +17,11 @@ Installing BareBones is a very simple process.
 #Developer Documentation
 Writing an application with BareBones is fairly straight forward. BareBones has an easy to understand directory structure, and simple syntax.
 
-#System Requirements
+##System Requirements
 
 BareBones has been tested on a Debian 8 Jessie server running PHP7, Apache 2.4 with `mod_rewrite` enabled, and a MySQL database. BareBones should work on PHP >= 5.4 and Apache 2.* as well as any distribution of Linux. It required the `mod_rewrite` Apache module be enabled.
 
-#File Structure
+##File Structure
 
 - `libs`: BareBones keeps all of it's required dependencies in `libs/BareBones`. You are free to add your application's dependendies anywhere within the `libs` directory including the BareBones sub-directory so long as you do not cause path conflicts with BareBone's dependencies.
 - `public`: This directory contains `index.php` which will be the root of your application. All requests are forwarded to this directory. Any front-end dependencies that need to be internal to your BareBones application should go here. Keep in mind that BareBones is intended to compliment JavaScript frameworks like Angular and be contained in a sub-directory of the client application. If you're using BareBones for this purpose, you may not even need to add files to the public directory.
