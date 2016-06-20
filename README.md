@@ -35,11 +35,11 @@ BareBones has been tested on a Debian 8 Jessie server running PHP7, Apache 2.4 w
 
 ##File Structure
 
-- `libs`: BareBones keeps all of it's required dependencies in `libs/BareBones`. You are free to add your application's dependendies anywhere within the `libs` directory including the BareBones sub-directory so long as you do not cause path conflicts with BareBone's dependencies.
-- `public`: This directory contains `index.php` which will be the root of your application. All requests are forwarded to this directory. Any front-end dependencies that need to be internal to your BareBones application should go here. Keep in mind that BareBones is intended to compliment JavaScript frameworks like Angular and be contained in a sub-directory of the client application. If you're using BareBones for this purpose, you may not even need to add files to the public directory.
-- `config`: This directory contains BareBone's configuration files. You may use this directory for your own application's configuration files as long as they do not create a path conflict with any of BareBone's configuration files.
-- `assets`: This directory contains 3 sub-directories: `controllers`, `models`, and `views`. Controllers, models, and views should be contained in their related directories. You will not be able to access views in the controllers directory, etc. Each of these sub-directories can contain sub-directories containing their related files without affecting their accesibility. (I.E. You can put a controller in `controllers/main`, etc.)
-- `core`: This directory contains the core BareBone's classes as well as an initialization file. No editing is required.
+`libs`: BareBones keeps all of it's required dependencies in `libs/BareBones`. You are free to add your application's dependendies anywhere within the `libs` directory including the BareBones sub-directory so long as you do not cause path conflicts with BareBone's dependencies.
+`public`: This directory contains `index.php` which will be the root of your application. All requests are forwarded to this directory. Any front-end dependencies that need to be internal to your BareBones application should go here. Keep in mind that BareBones is intended to compliment JavaScript frameworks like Angular and be contained in a sub-directory of the client application. If you're using BareBones for this purpose, you may not even need to add files to the public directory.
+`config`: This directory contains BareBone's configuration files. You may use this directory for your own application's configuration files as long as they do not create a path conflict with any of BareBone's configuration files.
+`assets`: This directory contains 3 sub-directories: `controllers`, `models`, and `views`. Controllers, models, and views should be contained in their related directories. You will not be able to access views in the controllers directory, etc. Each of these sub-directories can contain sub-directories containing their related files without affecting their accesibility. (I.E. You can put a controller in `controllers/main`, etc.)
+`core`: This directory contains the core BareBone's classes as well as an initialization file. No editing is required.
 
 ##Namespacing
 
