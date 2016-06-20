@@ -212,7 +212,7 @@ Ex)
   /* Look for a controller in "assets/controllers/subdir" contained in "thirdController.php" */
   $app->controllerExists("thirdController", "/subdir/");
 ```
-`checkDefaultMethod()`: The `checkDefaultMethod` method returns `true` if the current controller has an `index` method, and `false` if a controller is not set, or does not contain the `index` method.
+**`checkDefaultMethod()`**: The `checkDefaultMethod` method returns `true` if the current controller has an `index` method, and `false` if a controller is not set, or does not contain the `index` method.
 
 Ex)
 ```php
@@ -311,7 +311,7 @@ Ex)
     }
   });
 ```
-**`easyRoute()**: The `easyRoute` method, if used, should be **called after all other route methods other than `notFound`**. This method checks if a route was found, and if a route was not found attempts to use a default behavior to find a controller and method to call. The request URI will be broken up into an array (delimited by `/`). The first value of the array will be the name of the controller `easyRoute` attempts to find. If there is no second array index, `easyRoute` will look for a default index method on the controller. If the second array index is defined, it will look for a method whose name is the second value in the array. If there are more than two array values, the remaining values will be passed to the method found as arguments.
+**`easyRoute()`**: The `easyRoute` method, if used, should be **called after all other route methods other than `notFound`**. This method checks if a route was found, and if a route was not found attempts to use a default behavior to find a controller and method to call. The request URI will be broken up into an array (delimited by `/`). The first value of the array will be the name of the controller `easyRoute` attempts to find. If there is no second array index, `easyRoute` will look for a default index method on the controller. If the second array index is defined, it will look for a method whose name is the second value in the array. If there are more than two array values, the remaining values will be passed to the method found as arguments.
 
 Ex)
 ```php
@@ -324,7 +324,7 @@ Ex)
   $app->easyRoute();
 ```
 
-`notfound($callBack)` The `notFound` method is used to specify a callback if a route has not been found. **This method should only be used after ALL other routing methods have been called.** The `notFound` method takes one argument (`$callBack`) which is an anonymous callback function.
+**`notfound($callBack)`** The `notFound` method is used to specify a callback if a route has not been found. **This method should only be used after ALL other routing methods have been called.** The `notFound` method takes one argument (`$callBack`) which is an anonymous callback function.
 
 Ex)
 ```php
