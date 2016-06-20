@@ -29,6 +29,45 @@ BareBones has been tested on a Debian 8 Jessie server running PHP7, Apache 2.4 w
 - `assets`: This directory contains 3 sub-directories: `controllers`, `models`, and `views`. Controllers, models, and views should be contained in their related directories. You will not be able to access views in the controllers directory, etc. Each of these sub-directories can contain sub-directories containing their related files without affecting their accesibility. (I.E. You can put a controller in `controllers/main`, etc.)
 - `core`: This directory contains the core BareBone's classes as well as an initialization file. No editing is required.
 
+##Namespacing
+
+BarBones contains itself in the `BareBones` namespace. BareBones extends [Laravel's Eloquent](https://laravel.com/docs/5.1/eloquent) which lives in the `Illuminate` namesapce. The `BareBones` and `Illuminate` namespaces will therefore not be available for your application. This also means that when creating controller and model classes you will need to extend your class with `BareBones\Controller` and `BareBones\Model` respectively. You must also use `BareBones/App` when creating an instantiation of the BareBone's `App` class.
+
+Ex)
+```php
+<?php
+
+  /* Access BareBones classes using namespace path...*/
+  $app = new BareBones\App;
+  class BareBonesController extends BareBones\Controller
+  {
+    /* Methods, propoerties, etc. */
+  }
+  class BareBonesModel extends BareBones\Model
+  {
+    /* Methods, propoerties, etc. */
+  }
+```
+
+Alternatively, simply decalare the namespace at the top of your file like this...
+
+```php
+<?php
+
+  namespace BareBones;
+  
+  /* Access to all BareBones classes without namespace path...*/
+  $app = new App;
+  class BareBonesController extends Controller
+  {
+    /* Methods, propoerties, etc. */
+  }
+  class BareBonesModel extends Model
+  {
+    /* Methods, propoerties, etc. */
+  }
+```
+
 ##Controllers
 
 Creating a BareBones controller is simple. To create a controller, create a file in the `controllers` directory. It is important that the name of this file be the same name as the controller class name it will contain. Class names are not case-sensitive, but filenames are.
@@ -37,7 +76,7 @@ BareBone's `easyRoute` method recognizes a default method on controllers. This m
 ```php
 <?php
 
-  class BareBonesController extends Controller
+  class BareBonesController extends BareBones\Controller
   {
     /* The "index()" method will be used by Easy Route. */
     index()
@@ -64,7 +103,7 @@ Ex)
 ```php
 <?php
 
-  class BareBonesController extends Controller
+  class BareBonesController extends BareBones\Controller
   {
     index()
     {
@@ -90,7 +129,7 @@ Ex)
 ```php
 <?php
 
-  class BareBonesController extends Controller
+  class BareBonesController extends BareBones\Controller
   {
     index()
     {
@@ -139,7 +178,7 @@ Ex)
 
   require_once("../core/init.php");
 
-  $app = new App;
+  $app = new BareBones\App;
 
   /* Look for a controller in "assets/controllers" contained in "firstController.php" */
   $app->controllerExists("firstController");
@@ -158,7 +197,7 @@ Ex)
 
   require_once("../core/init.php");
 
-  $app = new App;
+  $app = new BareBones\App;
 
   /* Check if the the current controller has an "index" method. */
   $hasDefaultMethodBoolean = $app->checkDefaultMethod();
@@ -171,7 +210,7 @@ Ex)
 <?php
   require_once("../core/init.php");
 
-  $app = new App;
+  $app = new BareBones\App;
 
   /* Set $App's controller to and instance of `firstController` contained in "assets/controllers/firstController.php". */
   if ($app->setController("firstController"))
@@ -203,7 +242,7 @@ Ex) Assume BareBone's installation at `http://yourDomain.com/BareBones`
 
   require_once("../core/init.php");
 
-  $app = new App;
+  $app = new BareBones\App;
 
   /* Create a route which matches a GET request to "http://yourDomain.com/BareBones/get" and echos some text. */
   $app->get("/get", function() {
@@ -235,7 +274,7 @@ Ex)
 
   require_once("../core/init.php");
 
-  $app = new App;
+  $app = new BareBones\App;
 
   /* Create a route which matches GET and POST requests to "http://yourDomain.com/BareBones/getPost" and echos some text. */
   $app->route(["GET", "POST"], "/getPost", function() {
@@ -257,7 +296,7 @@ Ex)
 
   require_once("../core/init.php");
 
-  $app = new App;
+  $app = new BareBones\App;
 
   $app->easyRoute();
 ```
@@ -270,7 +309,7 @@ Ex)
 
   require_once("../core/init.php");
 
-  $app = new App;
+  $app = new BareBones\App;
   
   /* If a route has not been found at the time of the "notFound" method call, set $App's controller to "notFoundController" contained in "assets/controllers/notFoundController.php" and execute the "index" method of the controller.*/
   $app->notFound(function() use($app) {
