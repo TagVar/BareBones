@@ -12,7 +12,19 @@ BareBones models extend the Eloquent ORM, and views extend the Twig templating e
 Installing BareBones is a very simple process.
 
 - Clone this repository into any directory within Apache2's document root. (Yes, it really will work from any directory.)
-- Edit the database configuration file located at 'config/database.php'. Enter the desired database definition in Capsule's 'addConnection' method.
+- Edit the database configuration file located at 'config/database.ini'. Enter the desired database definition in `database.ini`
+
+Ex)
+```php
+database[driver] = "mysql"
+database[host] = "localhost"
+database[database] = "MyDatabaseName"
+database[username] = "MySqlUsername"
+database[password] = "MySqlPassword"
+database[charset] = "utf8"
+database[collation] = "utf8_general_ci"
+database[prefix] = ""
+```
 
 #Developer Documentation
 Writing an application with BareBones is fairly straight forward. BareBones has an easy to understand directory structure, and simple syntax.
@@ -55,7 +67,7 @@ Alternatively, simply decalare the namespace at the top of your file like this..
 <?php
 
   namespace BareBones;
-  
+
   /* Access to all BareBones classes without namespace path...*/
   $app = new App;
   class BareBonesController extends Controller
@@ -322,7 +334,7 @@ Ex)
   require_once("../core/init.php");
 
   $app = new BareBones\App;
-  
+
   /* If a route has not been found at the time of the "notFound" method call, set $App's controller to "notFoundController" contained in "assets/controllers/notFoundController.php" and execute the "index" method of the controller.*/
   $app->notFound(function() use($app) {
     if ($app->setController("notFoundController"))
