@@ -19,7 +19,7 @@ Writing an application with BareBones is fairly straight forward. BareBones has 
 
 ##System Requirements
 
-BareBones has been tested on a Debian 8 Jessie server running PHP7, Apache 2.4 with `mod_rewrite` enabled, and a MySQL database. BareBones should work on PHP >= 5.4 and Apache 2.* as well as any distribution of Linux. It required the `mod_rewrite` Apache module be enabled.
+BareBones has been tested on a Debian 8 Jessie server running PHP7, Apache 2.4 with `mod_rewrite` enabled, and a MySQL database. BareBones should work on PHP >= 5.6 and Apache 2.* as well as any distribution of Linux. It requires the `mod_rewrite` Apache module be enabled.
 
 ##File Structure
 
@@ -31,7 +31,7 @@ BareBones has been tested on a Debian 8 Jessie server running PHP7, Apache 2.4 w
 
 ##Namespacing
 
-BarBones contains itself in the `BareBones` namespace. BareBones extends [Laravel's Eloquent](https://laravel.com/docs/5.1/eloquent) which lives in the `Illuminate` namesapce. The `BareBones` and `Illuminate` namespaces will therefore not be available for your application. This also means that when creating controller and model classes you will need to extend your class with `BareBones\Controller` and `BareBones\Model` respectively. You must also use `BareBones/App` when creating an instantiation of the BareBone's `App` class.
+BarBones contains itself in the `BareBones` namespace. BareBones extends [Laravel's Eloquent](https://laravel.com/docs/5.1/eloquent) which lives in the `Illuminate` namesapce. The `BareBones` and `Illuminate` namespaces will therefore not be available to your application. This also means that when creating controller and model classes you will need to extend your class with `BareBones\Controller` and `BareBones\Model` respectively. You must also use `BareBones\App` when creating an instantiation of the BareBone's `App` class.
 
 Ex)
 ```php
@@ -149,7 +149,19 @@ Ex)
 ```
 ##Models
 
-BareBones models simply extend Eloquent and set Eloquent's timestamp requirements to `false`. This is a public property of the class called `timestamps`.
+BareBones models simply extend Eloquent and set Eloquent's timestamp requirements to `false`. This is a public property of the class called `timestamps`. Let's create a simple model...
+
+```php
+<?php
+
+  class BareBonesModel extends BareBones\Model
+  {
+    method()
+    {
+      /* Method Stuff Here */
+    }
+  }
+```
 
 [The Documentation for Laravel's Eloquent can be Found Here](https://laravel.com/docs/4.2/eloquent)
 
@@ -161,7 +173,7 @@ Routing takes place in `public/index.php`. The default `index.php` looks like th
 
   require_once("../core/init.php");
 
-  $app = new App;
+  $app = new BareBones\App;
 ```
 
 You may change the name of the insantiated `App` class without consequence. (Other than having to inject a different reference into route callbacks.)
