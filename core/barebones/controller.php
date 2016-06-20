@@ -1,13 +1,15 @@
 <?php
 
+  namespace BareBones;
+
   class Controller
   {
     private $twigLoader;
     private $twig;
     public function __construct()
     {
-      $this->twigLoader = new Twig_Loader_Filesystem("../assets/views/");
-      $this->twig = new Twig_Environment($this->twigLoader);
+      $this->twigLoader = new \Twig_Loader_Filesystem("../assets/views/");
+      $this->twig = new \Twig_Environment($this->twigLoader);
     }
     protected function getModel($model, $path = "")
     {

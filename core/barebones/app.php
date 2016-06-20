@@ -1,11 +1,14 @@
 <?php
 
+  namespace BareBones;
+
   class App
   {
     public $controller;
     public $routeFound = false;
     private $uri;
     private $relativePath;
+    private $configuration = [];
     private function parseUri()
     {
       if (isset($_GET["uri"]))
@@ -175,9 +178,20 @@
         }
       }
     }
-    public function __construct()
+    function __construct()
     {
       //Set request URI.
       $this->uri = $this->parseUri();
+      //Load Configuration
+      $iniFiles = array_filter(scandir("../config"), function($scanResult) {
+        return ("ini" === pathinfo($scanResult, PATHINFO_EXTENSION));
+      });
+      foreach($iniFiles as $iniFile)
+        $this->configuration[basename($iniFile, ".php")] = parse_ini_file("../config/$iniFile");
+      //Boot Eloquent
+      $capsule = new \Illuminate\Database\Capsule\Manager;
+      $capsule->addConnection($this->configuration["database.ini"]["database"]);
+      $capsule->setAsGlobal();
+      $capsule->bootEloquent();
     }
   }
