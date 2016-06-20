@@ -31,15 +31,14 @@ Writing an application with BareBones is fairly straight forward. BareBones has 
 
 ##System Requirements
 
-BareBones has been tested on a Debian 8 Jessie server running PHP7, Apache 2.4 with `mod_rewrite` enabled, and a MySQL database. BareBones should work on PHP >= 5.6 and Apache 2.* as well as any distribution of Linux. It requires the `mod_rewrite` Apache module be enabled.
+BareBones has been tested on a Debian 8 Jessie server running PHP7, Apache 2.4 with `mod_rewrite` enabled, and a MySQL database. BareBones should work on PHP &gt;= 5.6 and Apache 2.* as well as any distribution of Linux. It requires the `mod_rewrite` Apache module be enabled.
 
 ##File Structure
-
-`libs`: BareBones keeps all of it's required dependencies in `libs/BareBones`. You are free to add your application's dependendies anywhere within the `libs` directory including the BareBones sub-directory so long as you do not cause path conflicts with BareBone's dependencies.
-`public`: This directory contains `index.php` which will be the root of your application. All requests are forwarded to this directory. Any front-end dependencies that need to be internal to your BareBones application should go here. Keep in mind that BareBones is intended to compliment JavaScript frameworks like Angular and be contained in a sub-directory of the client application. If you're using BareBones for this purpose, you may not even need to add files to the public directory.
-`config`: This directory contains BareBone's configuration files. You may use this directory for your own application's configuration files as long as they do not create a path conflict with any of BareBone's configuration files.
-`assets`: This directory contains 3 sub-directories: `controllers`, `models`, and `views`. Controllers, models, and views should be contained in their related directories. You will not be able to access views in the controllers directory, etc. Each of these sub-directories can contain sub-directories containing their related files without affecting their accesibility. (I.E. You can put a controller in `controllers/main`, etc.)
-`core`: This directory contains the core BareBone's classes as well as an initialization file. No editing is required.
+**`libs`**: BareBones keeps all of it's required dependencies in `libs/BareBones`. You are free to add your application's dependendies anywhere within the `libs` directory including the BareBones sub-directory so long as you do not cause path conflicts with BareBone's dependencies.  
+**`public`**: This directory contains `index.php` which will be the root of your application. All requests are forwarded to this directory. Any front-end dependencies that need to be internal to your BareBones application should go here. Keep in mind that BareBones is intended to compliment JavaScript frameworks like Angular and be contained in a sub-directory of the client application. If you're using BareBones for this purpose, you may not even need to add files to the public directory.  
+**`config`**: This directory contains BareBone's configuration files. You may use this directory for your own application's configuration files as long as they do not create a path conflict with any of BareBone's configuration files.  
+**`assets`**: This directory contains 3 sub-directories: `controllers`, `models`, and `views`. Controllers, models, and views should be contained in their related directories. You will not be able to access views in the controllers directory, etc. Each of these sub-directories can contain sub-directories containing their related files without affecting their accesibility. (I.E. You can put a controller in `controllers/main`, etc.)  
+**`core`**: This directory contains the core BareBone's classes as well as an initialization file. No editing is required.
 
 ##Namespacing
 
@@ -107,7 +106,7 @@ BareBone's `easyRoute` method recognizes a default method on controllers. This m
 
 **NOTE:** All controller methods return `false` upon failure/error.
 
-`getModel($modelName, $path="")`: The `getModel` method takes two arguments. The first (`$modelName`) is required and is the name of the model. Like controllers, class names are not case sensitive, but filenames are. When requiring a model with this method, simply use the model name, do not use the `.php` extension. The second argument (`$path`) is an optional variable. If you wish to require a model that is not contained directly in `assets/models` provide the directory path that the model file is contained in.
+**`getModel($modelName, $path="")`**: The `getModel` method takes two arguments. The first (`$modelName`) is required and is the name of the model. Like controllers, class names are not case sensitive, but filenames are. When requiring a model with this method, simply use the model name, do not use the `.php` extension. The second argument (`$path`) is an optional variable. If you wish to require a model that is not contained directly in `assets/models` provide the directory path that the model file is contained in.
 
 **NOTE:** `$path` has `/` characters trimmed.
 
@@ -131,7 +130,7 @@ Ex)
   }
 ```
 
-`renderView($viewPath, $viewData = ['staticPath'], $path)`: The `renderView` method also takes two arguments. The first (`$viewPath`) is the full view filename, including the extension. The second (`$viewData`) is an optional parameter. This array will pass variables to the Twig template engine as `$key=>$value pairs`. An indexed array will be treated as an associative array. (I.E. the variable name will be the numbered indes. 0, 1, 2, etc.) One `$viewData` index is reserved. `$viewData["staticPath"]` is always included. This variable will always be available to your views and is used to provide relative links to BareBone's `public` directory. The third argument (`$path`) is an optional variable. If you wish to render a view that is not contained directly in `assets/views` provide the directory path that the view file is contained in.
+**`renderView($viewPath, $viewData = ['staticPath'], $path)`**: The `renderView` method also takes two arguments. The first (`$viewPath`) is the full view filename, including the extension. The second (`$viewData`) is an optional parameter. This array will pass variables to the Twig template engine as `$key=>$value pairs`. An indexed array will be treated as an associative array. (I.E. the variable name will be the numbered indes. 0, 1, 2, etc.) One `$viewData` index is reserved. `$viewData["staticPath"]` is always included. This variable will always be available to your views and is used to provide relative links to BareBone's `public` directory. The third argument (`$path`) is an optional variable. If you wish to render a view that is not contained directly in `assets/views` provide the directory path that the view file is contained in.
 
 **NOTE:** $path has `/` characters trimmed.
 
@@ -192,7 +191,7 @@ You may change the name of the insantiated `App` class without consequence. (Oth
 
 ###App Setters and Getters
 
-`controllerExists($controllerName, $userPath = "")`: The `controllerExists` method checks if a controller file exists, and that file contains the controller class. The first argument (`$controllerName`) is the name of the controller. Do not include the `.php` extension. Remember, filenames are case-sensitive, but class names are not. The second argument (`$userPath`) is an optional argument for specifying a sub-directory within `assets/controllers` to look for the controller.
+**`controllerExists($controllerName, $userPath = "")`**: The `controllerExists` method checks if a controller file exists, and that file contains the controller class. The first argument (`$controllerName`) is the name of the controller. Do not include the `.php` extension. Remember, filenames are case-sensitive, but class names are not. The second argument (`$userPath`) is an optional argument for specifying a sub-directory within `assets/controllers` to look for the controller.
 
 **NOTE:** The `$userPath` argument has the `/` characters trimmed.
 
@@ -227,7 +226,7 @@ Ex)
   $hasDefaultMethodBoolean = $app->checkDefaultMethod();
 ```
 
-`setController($controllerName, $userPath = "")`: The `setController` method sets the applications current controller. Typically, this should only be done once per route, but it is possible (if avoiding class-name conflicts) to execute this method more than once per route. The first argument (`$controllerName`) is the name of the controller. Do not include the `.php` extension. Remember, filenames are case-sensitive, but class names are not. The second argument (`$userPath`) is an optional argument for specifying a sub-directory within `assets/controllers` to look for the controller. This function returns `true` if the controller was succesfully set.
+**`setController($controllerName, $userPath = "")`**: The `setController` method sets the applications current controller. Typically, this should only be done once per route, but it is possible (if avoiding class-name conflicts) to execute this method more than once per route. The first argument (`$controllerName`) is the name of the controller. Do not include the `.php` extension. Remember, filenames are case-sensitive, but class names are not. The second argument (`$userPath`) is an optional argument for specifying a sub-directory within `assets/controllers` to look for the controller. This function returns `true` if the controller was succesfully set.
 
 Ex)
 ```php
@@ -250,9 +249,9 @@ Ex)
 ```
 ###App Routing Methods
 
-**NOTE:** All `$URI` arguments have the `/` characters trimmed.
+**NOTE:** All `$uri` arguments have the `/` characters trimmed.
 
-`get(), post(), put(), delete(), all()`: All five of these basic routing functions differ only in the type of request they match. A route declared with the `get` method will only match GET requests, etc. the `all` method will match all request types. Each of these methods follow the same format...
+**`get(), post(), put(), delete(), all()`**: All five of these basic routing functions differ only in the type of request they match. A route declared with the `get` method will only match GET requests, etc. the `all` method will match all request types. Each of these methods follow the same format...
 
 `requestType($uri, $callback)`
 
@@ -281,7 +280,7 @@ Ex) Assume BareBone's installation at `http://yourDomain.com/BareBones`
   });
 ```
 
-`route($requestTypes = [], $uri, $callback)`: The `route` method is used to match multiple, but not all request types to a route. The first argument (`$requestTpyes`) should be an array of request types to match. The possible array values are...
+**`route($requestTypes = [], $uri, $callback)`**: The `route` method is used to match multiple, but not all request types to a route. The first argument (`$requestTpyes`) should be an array of request types to match. The possible array values are...
 
 - GET
 - POST
@@ -312,7 +311,7 @@ Ex)
     }
   });
 ```
-`easyRoute()`: The `easyRoute` method, if used, should be **called after all other route methods other than `notFound`**. This method checks if a route was found, and if a route was not found attempts to use a default behavior to find a controller and method to call. The request URI will be broken up into an array (delimited by `/`). The first value of the array will be the name of the controller `easyRoute` attempts to find. If there is no second array index, `easyRoute` will look for a default index method on the controller. If the second array index is defined, it will look for a method whose name is the second value in the array. If there are more than two array values, the remaining values will be passed to the method found as arguments.
+**`easyRoute()**: The `easyRoute` method, if used, should be **called after all other route methods other than `notFound`**. This method checks if a route was found, and if a route was not found attempts to use a default behavior to find a controller and method to call. The request URI will be broken up into an array (delimited by `/`). The first value of the array will be the name of the controller `easyRoute` attempts to find. If there is no second array index, `easyRoute` will look for a default index method on the controller. If the second array index is defined, it will look for a method whose name is the second value in the array. If there are more than two array values, the remaining values will be passed to the method found as arguments.
 
 Ex)
 ```php
