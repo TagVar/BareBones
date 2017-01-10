@@ -12,10 +12,10 @@
         if (isset($model))
         {
           $modelPath = "../assets/models/";
-          $model = trim($namespace, "\\");
+          $model = trim($model, "\\");
           if (str_replace(" ", "", $namespace) != "")
             $namespace = trim($namespace, "\\") . "\\";
-          if (file_exists("" . str_replace('\\', '/', $namespace) . "$model.php"))
+          if (file_exists($modelPath . str_replace('\\', '/', $namespace) . "$model.php"))
           {
             require_once($modelPath . str_replace('\\', '/', $namespace) . "$model.php");
             if (class_exists("models\\" . $namespace . $model))
