@@ -1,10 +1,9 @@
 <?php
 
-  namespace BareBones;
+  namespace BareBones\ModelTraits
 
-  class Model extends \Eloquent
+  trait RequireModel
   {
-    public $timestamps = false;
     protected function requireModel($model, $namespace = "")
     {
       function pullModel($model, $namespace = "")
@@ -64,4 +63,4 @@
         return pullModel($model, $namespace);
       }
     }
-  };
+  }

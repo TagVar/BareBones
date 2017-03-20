@@ -10,8 +10,9 @@
 
   //Require Core Classes
   require_once("barebones/app.php");
+  require_once("barebones/router/router.php");
   require_once("barebones/controller.php");
-  require_once("barebones/model.php");
+  require_once("barebones/model/model.php");
 
   // Initialize Twig
   \Twig_Autoloader::register();
