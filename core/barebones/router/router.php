@@ -10,6 +10,7 @@
   class Route
   {
     static $registeredRoutes;
+    static $notFoundCallback = false;
     static $routeFound = false;
     private static function registerRoute($requestType, $route, $callback)
     {
@@ -74,11 +75,7 @@
     }
     static function notFound($callback)
     {
-      if (!self::$routeFound)
-      {
-        $callback();
-        self::$routeFound = true;
-      }
+      self::$notFoundCallback = $callback;
     }
     static function easyRoute(&$appReference)
     {
@@ -132,6 +129,11 @@
               self::$routeFound = true;
               break;
             }
+          }
+          if (self::$routeFound != true && self::$notFoundCallback != false)
+          {
+            $callback = self::$notFoundCallback;
+            $callback();
           }
         }
       }
