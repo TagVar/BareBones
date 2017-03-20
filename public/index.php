@@ -6,8 +6,6 @@
 
   $app = new BareBones\App;
 
-  Route::get("test/$", function($test) {
-    echo $test;
-  })->middleware(["policies\\testTwo"]);
+
 
   $app->run();
