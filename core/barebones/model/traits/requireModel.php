@@ -1,33 +1,33 @@
 <?php
 
-  namespace BareBones\ModelTraits
+  namespace BareBones\ModelTraits;
 
   trait RequireModel
   {
-    protected function requireModel($model, $namespace = "")
+    private function pullModel($model, $namespace = "")
     {
-      function pullModel($model, $namespace = "")
+      if (isset($model))
       {
-        if (isset($model))
+        $modelPath = "../assets/models/";
+        $model = trim($model, "\\");
+        if (str_replace(" ", "", $namespace) != "")
+          $namespace = trim($namespace, "\\") . "\\";
+        if (file_exists($modelPath . str_replace('\\', '/', $namespace) . "$model.php"))
         {
-          $modelPath = "../assets/models/";
-          $model = trim($model, "\\");
-          if (str_replace(" ", "", $namespace) != "")
-            $namespace = trim($namespace, "\\") . "\\";
-          if (file_exists($modelPath . str_replace('\\', '/', $namespace) . "$model.php"))
-          {
-            require_once($modelPath . str_replace('\\', '/', $namespace) . "$model.php");
-            if (class_exists("models\\" . $namespace . $model))
-              return true;
-            else
-              return false;
-          }
+          require_once($modelPath . str_replace('\\', '/', $namespace) . "$model.php");
+          if (class_exists("models\\" . $namespace . $model))
+            return true;
           else
             return false;
         }
         else
           return false;
       }
+      else
+        return false;
+    }
+    protected function requireModel($model, $namespace = "")
+    {
       if (is_array($model))
       {
         $succesfulAddCounter = 0;
@@ -44,12 +44,12 @@
               $argumentArray[1] = $modelToPull[1];
             if (isset($modelToPull["namespace"]))
               $argumentArray[1] = $modelToPull["namespace"];
-            if (pullModel($argumentArray[0], $argumentArray[1]))
+            if ($this->pullModel($argumentArray[0], $argumentArray[1]))
               $succesfulAddCounter++;
           }
           else
           {
-            if (pullModel($modelToPull))
+            if ($this->pullModel($modelToPull))
               $succesfulAddCounter++;
           }
         }
@@ -60,7 +60,7 @@
       }
       else
       {
-        return pullModel($model, $namespace);
+        return $this->pullModel($model, $namespace);
       }
     }
   }

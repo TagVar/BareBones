@@ -1,6 +1,6 @@
 <?php
 
-  namespace BareBones\ModelTraits
+  namespace BareBones\ModelTraits;
 
   trait GetModel
   {
