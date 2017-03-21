@@ -34,13 +34,32 @@
       if (strtolower($namespaceParts[0] == "groups"))
         return true;
     }
+    private static function parseMembers($members)
+    {
+      $parsedMembers = [];
+      foreach($members as $member)
+      {
+        $memberObject = new \stdClass;
+        if (is_array($member))
+        {
+          if (is_string($member[1]))
+            $member[1] = array($member[1]);
+          $memberObject->policy = $member[0];
+          $memberObject->parameters = $member[1];
+        }
+        else
+          $memberObject->policy = $member;
+        $parsedMembers[] = $memberObject;
+      }
+      return $parsedMembers;
+    }
     private static function groupMembers($group)
     {
       if (self::exists($group))
       {
         $fullyQualifiedGroupName = "\BareBones\Middleware\\$group";
         if (isset($fullyQualifiedGroupName::$members) && is_array($fullyQualifiedGroupName::$members))
-          return $fullyQualifiedGroupName::$members;
+          return self::parseMembers($fullyQualifiedGroupName::$members);
         else
           return false;
       }
@@ -51,7 +70,7 @@
     {
       require_once("../assets/middleware/global.php");
       $globalClass = "\BareBones\Middleware\GlobalMiddleware";
-      return $globalClass::$members;
+      return self::parseMembers($globalClass::$members);
     }
     private static function runGlobal($when, $route)
     {
@@ -66,11 +85,11 @@
     }
     private static function run($when, $middleware, $route)
     {
-      if (self::exists($middleware))
+      if (self::exists($middleware->policy))
       {
-        if (self::isGroup($middleware))
+        if (self::isGroup($middleware->policy))
         {
-          $members = self::groupMembers($middleware);
+          $members = self::groupMembers($middleware->policy);
           foreach ($members as $member)
           {
             self::run($when, $member, $route);
@@ -78,9 +97,14 @@
         }
         else
         {
-          $fullyQualifiedMiddlewareName = "\BareBones\Middleware\\" . $middleware;
+          $fullyQualifiedMiddlewareName = "\BareBones\Middleware\\" . $middleware->policy;
           if (method_exists($fullyQualifiedMiddlewareName, $when))
-            $fullyQualifiedMiddlewareName::$when($route);
+          {
+            $parameters = [$route];
+            if (isset($middleware->parameters))
+              $parameters = array_merge($parameters, $middleware->parameters);
+            call_user_func_array([$fullyQualifiedMiddlewareName, $when], $parameters);
+          }
         }
       }
       else
