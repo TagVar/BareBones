@@ -13,7 +13,7 @@
     }
     private function addMiddleware($middleware, $parameters = null)
     {
-      $requestType = $_SERVER["REQUEST_METHOD"];
+      $requestType = $this->requestType;
       end(\BareBones\Route::$registeredRoutes->$requestType);
       $routeIndex = key(\BareBones\Route::$registeredRoutes->$requestType);
       $middlewareObject = new \stdclass;
