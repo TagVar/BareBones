@@ -346,7 +346,7 @@ Ex)
 #Support
 Original Author: Allen Hundley for TagVar LLC
 
-Email: Allen@TagVar.com
+Email: AllenPHundley@Gmail.com
 
 #License
 License Owner: TagVar LLC
