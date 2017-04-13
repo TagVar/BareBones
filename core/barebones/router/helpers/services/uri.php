@@ -6,8 +6,8 @@
   {
     static function parseUri()
     {
-      if (isset($_GET["uri"]))
-        return explode("/", filter_var(trim($_GET["uri"], "/"), FILTER_SANITIZE_URL));
+      if (isset($_SERVER['REQUEST_URI']))
+        return explode("/", filter_var(trim($_SERVER['REQUEST_URI'], "/"), FILTER_SANITIZE_URL));
       else
         return [];
     }
