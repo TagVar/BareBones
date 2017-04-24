@@ -7,7 +7,11 @@
     static function parseUri()
     {
       if (isset($_SERVER['REQUEST_URI']))
-        return explode("/", filter_var(trim($_SERVER['REQUEST_URI'], "/"), FILTER_SANITIZE_URL));
+      {
+        $uriWithoutGet = explode("?", $_SERVER['REQUEST_URI']);
+        $uriWithoutGet = $uriWithoutGet[0];
+        return explode("/", filter_var(trim($uriWithoutGet, "/"), FILTER_SANITIZE_URL));
+      }
       else
         return [];
     }
