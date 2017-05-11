@@ -8,6 +8,10 @@
 
   class Model extends \Eloquent
   {
+    function __construct()
+    {
+      parent::__construct();
+    }
     use \BareBones\ModelTraits\RequireModel;
     use \BareBones\ModelTraits\GetModel;
     public $timestamps = false;
